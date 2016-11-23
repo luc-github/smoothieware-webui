@@ -85,14 +85,15 @@
                 vm.currentUploadedFile = {filename: file.name, uploading: true, percentage: 0};
                 vm.fileList.push(vm.currentUploadedFile);
 
-                Upload.http({
+                Upload.upload({
                     url: '/upload',
-                    headers: {
+                    method: 'POST',
+                    file: file,
+                    data: {
                         'X-Filename': file.name
-                    },
-                    data: file
+                    }
                 }).then(function (resp) {
-                    DataService.broadcastCommand('Upload successful. Response: ' + resp.data);
+                    DataService.broadcastCommand('Upload successful\n');
                     vm.currentUploadedFile.uploading = false;
 
                     vm.refreshFiles();
