@@ -14,7 +14,7 @@ Just copy the index.html.gz file to SPIFFS partition and call the index.html fil
 Be noted: the browser calling index.html need internet access to download the necessary javascript files (jquery, angular, etc..)
 
 
-Original version is :
+Original version of Jarek Szczepanski (imrahil) is here :
 
 ### more info - http://imrahil.github.io/smoothieware-webui/
 
