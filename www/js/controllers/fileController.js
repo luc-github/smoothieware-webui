@@ -6,7 +6,11 @@
         .controller('FileCtrl', FileCtrl);
 
     FileCtrl.$inject = ['DataService', 'Upload'];
-    var currentRoot = "/ext/";
+    var currentRoot = "/sd/";
+    function showbutton(){
+        if (currentRoot == "/ext/") return false;
+        else return true;
+    }
     function FileCtrl(DataService, Upload) {
         var vm = this;
 
@@ -19,6 +23,7 @@
         vm.abort = abort;
         vm.uploadFile = uploadFile;
         vm.deleteFile = deleteFile;
+        vm.showbutton = showbutton;
 
         activate();
 
@@ -30,7 +35,9 @@
 
         function refreshFiles(rootsd) {
             console.log('RefreshFiles');
+            if(currentRoot != rootsd)vm.fileList = [];
             currentRoot = rootsd;
+            document.getElementById("root_sd").innerHTML=currentRoot;
             DataService.runCommand("ls " + rootsd)
                 .then(function (result_data) {
                     parseFilelist(result_data);

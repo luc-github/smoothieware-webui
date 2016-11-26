@@ -177,7 +177,7 @@
                 <div id="filePanel" class="col-lg-6 col-md-6">
                     <div class="panel panel-default" data-ng-controller="FileCtrl as fileVM">
                         <div class="panel-heading">
-                            <span translate>Files</span>
+                            <span translate>Files</span><span>:&nbsp;</span><span id="root_sd">/sd/</span>
                             <div class="pull-right">
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/sd/')" translate>/sd</button>
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/ext/')" translate>/ext</button>
@@ -194,7 +194,7 @@
                                         <div class="col-md-4 col-sm-5"><uib-progressbar class="progress-striped active" data-ng-show="file.uploading" value="file.percentage"><span data-ng-bind="file.percentage + '%'" data-ng-hide="file.percentage < 5"></span></uib-progressbar></div>
                                         <div class="col-md-4 col-sm-2">
                                             <div class="pull-right">
-                                                <button class="btn btn-xs btn-default" data-ng-click="fileVM.deleteFile(file)" translate>Delete</button>
+                                                <button class="btn btn-xs btn-default" ng-if="fileVM.showbutton()" data-ng-click="fileVM.deleteFile(file)" translate>Delete</button>
                                                 <button class="btn btn-xs btn-default" data-ng-click="fileVM.print(file.filename)" translate>Print</button>
                                             </div>
                                         </div>
