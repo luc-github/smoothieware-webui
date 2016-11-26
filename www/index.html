@@ -179,7 +179,8 @@
                         <div class="panel-heading">
                             <span translate>Files</span>
                             <div class="pull-right">
-                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles()" translate>Refresh</button>
+                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/sd/')" translate>/sd</button>
+                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/ext/')" translate>/ext</button>
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.progress()" translate>Progress</button>
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.abort()" translate>Abort</button>
                                 <button class="btn btn-xs btn-primary" data-ngf-select="fileVM.uploadFile($file)" data-ngf-accept="'.gco,.gcode'" translate>Upload</button>

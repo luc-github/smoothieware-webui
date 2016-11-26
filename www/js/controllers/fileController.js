@@ -6,13 +6,13 @@
         .controller('FileCtrl', FileCtrl);
 
     FileCtrl.$inject = ['DataService', 'Upload'];
-
+    var currentRoot = "/ext/";
     function FileCtrl(DataService, Upload) {
         var vm = this;
 
         vm.fileList = [];
         vm.currentUploadedFile = {};
-
+        vm.currentRoot = currentRoot;
         vm.refreshFiles = refreshFiles;
         vm.print = print;
         vm.progress = progress;
@@ -25,13 +25,13 @@
         ////////////////
 
         function activate() {
-            refreshFiles();
+            refreshFiles(currentRoot);
         }
 
-        function refreshFiles() {
+        function refreshFiles(rootsd) {
             console.log('RefreshFiles');
-
-            DataService.runCommand("M20")
+            currentRoot = rootsd;
+            DataService.runCommand("ls " + rootsd)
                 .then(function (result_data) {
                     parseFilelist(result_data);
                 }, function (error) {
@@ -52,9 +52,9 @@
         }
 
         function print(file) {
-            console.log('print file - ' + file);
+            console.log('print file - ' + currentRoot + file);
 
-            DataService.runCommand("play /sd/" + file)
+            DataService.runCommand("play " + currentRoot + file)
                 .then(function (result) {
                     console.log('Result: ' + result);
                 });
@@ -96,7 +96,7 @@
                     DataService.broadcastCommand('Upload successful\n');
                     vm.currentUploadedFile.uploading = false;
 
-                    vm.refreshFiles();
+                    vm.refreshFiles(currentRoot);
                 }, function (resp) {
                     DataService.broadcastCommand('Error status: ' + resp.status + "\n");
                 }, function (evt) {
@@ -108,10 +108,10 @@
         }
 
         function deleteFile(file) {
-            DataService.runCommand("M30 " + file.filename)
+            DataService.runCommand("rm " + currentRoot + file.filename)
                 .then(function (result_data) {
-                    DataService.broadcastCommand("Deleted file: " + file.filename + "\n");
-                    vm.refreshFiles();
+                    DataService.broadcastCommand("Deleted file: " + currentRoot + file.filename + "\n");
+                    vm.refreshFiles(currentRoot);
                 }, function (error) {
                     console.error(error.statusText);
                 });
