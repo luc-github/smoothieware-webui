@@ -2,8 +2,8 @@
 <html ng-app="smoothieApp">
     <head>
         <meta charset="UTF-8">
-        <title>Smoothieware WebUI</title>
-
+        <title>ESP3D</title>
+        <script>var target_firmware="Smoothieware";</script>
         <link href="lib/bootstrap-css-only/css/bootstrap.min.css" rel="stylesheet">
 
         <!--removeIf(production)-->
@@ -22,8 +22,32 @@
         <!-- navbar -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;" data-ng-controller="HeaderCtrl as headerVM">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Smoothieware webUI - </a><a class="navbar-brand" editable-text="headerVM.printerName" onaftersave="headerVM.updatePrinterName()" data-ng-bind="headerVM.printerName"></a>
+                <a class="navbar-brand" href="index.html">ESP3D for</a><a class="navbar-brand" editable-text="headerVM.printerName" onaftersave="headerVM.updatePrinterName()" data-ng-bind="headerVM.printerName"></a>
             </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li uib-dropdown>
+                     <a class="dropdown-toggle glyphicon glyphicon-info-sign" href="#" uib-dropdown-toggle></a>
+                     <ul class="dropdown-menu" uib-dropdown-menu>
+                        <li>
+                            <a href="http://www.panucatt.com/" >
+                                <span class="pull-right" translate>Board</span>
+                                <span class="glyphicon glyphicon-signal pull-left"></span>
+                                <span class="clearfix"></span>
+                            </a>
+                            <a href="https://github.com/luc-github/ESP3D" >
+                                <span class="pull-right" translate>Firmware</span>
+                                <span class="glyphicon glyphicon-cog pull-left"></span>
+                                <span class="clearfix"></span>
+                            </a>
+                            <a href="https://github.com/luc-github/smoothieware-webui-for-ESP3D" >
+                                <span class="pull-right" translate>Interface</span>
+                                <span class="glyphicon glyphicon-pencil pull-left"></span>
+                                <span class="clearfix"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
             <ul class="nav navbar-top-links navbar-right">
                 <li uib-dropdown>
