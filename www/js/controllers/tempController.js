@@ -52,10 +52,13 @@
         vm.heaterT0SelectedTemp = 0;
         vm.heaterT0ActualTemp = "-";
         vm.heaterT0DisplayTemp = "";
+        vm.heaterT0TargetTemp = 0;
         vm.heaterT1SelectedTemp = 0;
         vm.heaterT1ActualTemp = "-";
         vm.heaterT1DisplayTemp = "";
+        vm.heaterT1TargetTemp = 0;
         vm.bedSelectedTemp = 0;
+        vm.bedTargetTemp = 0;
         vm.bedActualTemp = "-";
         vm.bedDisplayTemp = "";
 
@@ -198,14 +201,17 @@
                         if (tool == "T") {
                             vm.heaterT0ActualTemp = result[3];
                             vm.heaterT0DisplayTemp = value;
+                            vm.heaterT0TargetTemp = Number(result[5]);
                         }
                         else if (tool == "T1") {
                             vm.heaterT1ActualTemp = result[3];
                             vm.heaterT1DisplayTemp = value;
+                            vm.heaterT1TargetTemp = Number(result[5]);
                         }
                         if (tool == "B") {
                             vm.bedActualTemp = Number(result[3]);
                             vm.bedDisplayTemp = value;
+                            vm.bedTargetTemp = Number(result[5]);
                         }
                     }
 

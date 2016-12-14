@@ -115,7 +115,7 @@
                                         <input type="text" style="width:50px" value="200" data-ng-model="tempVM.heaterT0SelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'T0')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('T0')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td class="col-lg-3"><span class="tempDisplay" data-ng-bind="tempVM.heaterT0DisplayTemp"></span></td>
+                                    <td class="col-lg-3"><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT0DisplayTemp"></span><span data-ng-show="tempVM.heaterT0TargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
                                 </tr>
                                 <tr data-ng-show="tempVM.secondExtruder.supportEnabled" data-ng-cloak>
                                     <td translate>Heater T1</td>
@@ -124,7 +124,7 @@
                                         <input type="text" style="width:50px" value="200" data-ng-model="tempVM.heaterT1SelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'T1')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('T1')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td><span class="tempDisplay" data-ng-bind="tempVM.heaterT1DisplayTemp"></span></td>
+                                    <td><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT1DisplayTemp"></span><span data-ng-show="tempVM.heaterT1TargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
                                 </tr>
                                 <tr>
                                     <td translate>Bed</td>
@@ -133,7 +133,7 @@
                                         <input type="text" style="width:50px" value="60" data-ng-model="tempVM.bedSelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'bed')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('bed')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td><span class="tempDisplay" ng-bind="tempVM.bedDisplayTemp"></span></td>
+                                    <td><span class="tempDisplay text-nowrap" ng-bind="tempVM.bedDisplayTemp"></span><span data-ng-show="tempVM.bedTargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -253,8 +253,9 @@
                 </div>
             </div>
          </div>
+        <div id="firmware_target">Unknown</div> 
     </div>
-
+   
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>

@@ -26,7 +26,7 @@
     function RunBlock(gettextCatalog, localStorageService, editableOptions, $httpBackend) {
         gettextCatalog.setCurrentLanguage(localStorageService.get('currentLanguage') || 'en');
         gettextCatalog.debug = true;
-
+        firmware_target.innerHTML=target_firmware;
         editableOptions.theme = 'bs3';
         editableOptions.activate = 'select';
 
