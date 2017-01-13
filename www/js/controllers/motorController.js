@@ -29,7 +29,7 @@
         function motorsOff() {
             console.log('MotorsOff');
 
-            DataService.runCommand("M18")
+            DataService.runCommand("M84")
                 .then(function (result) {
                     console.log('Motors turned off! - Result: ' + result);
                 }, function (error) {
