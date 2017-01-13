@@ -196,22 +196,25 @@
                     while ((result = regex_temp.exec(result_data)) !== null) {
                         var tool = result[1];
                         var value = result[3] + "°C";
-                        value += " | " + result[5] + "°C";
+                        var value2;
+                        if (Number.isNaN(Number(result[5]))) value2 = "0.0";
+                        else value2 = result[5];
+                        value += " | " + value2 + "°C";
 
                         if (tool == "T") {
                             vm.heaterT0ActualTemp = result[3];
                             vm.heaterT0DisplayTemp = value;
-                            vm.heaterT0TargetTemp = Number(result[5]);
+                            vm.heaterT0TargetTemp = Number(value2);
                         }
                         else if (tool == "T1") {
                             vm.heaterT1ActualTemp = result[3];
                             vm.heaterT1DisplayTemp = value;
-                            vm.heaterT1TargetTemp = Number(result[5]);
+                            vm.heaterT1TargetTemp = Number(value2);
                         }
                         if (tool == "B") {
                             vm.bedActualTemp = Number(result[3]);
                             vm.bedDisplayTemp = value;
-                            vm.bedTargetTemp = Number(result[5]);
+                            vm.bedTargetTemp = Number(value2);
                         }
                     }
 

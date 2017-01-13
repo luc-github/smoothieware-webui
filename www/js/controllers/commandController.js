@@ -105,6 +105,9 @@
 
             var regex = /ok T:/g;
 
+            if (target_firmware.toLowerCase() == "repetier" || target_firmware.toLowerCase() == "repetier_davinci"){
+                regex = /T:/g;
+            }
             var output = "";
             var logLength = vm.log.length;
             for (var i = 0; i < logLength; i++) {

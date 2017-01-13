@@ -22,18 +22,13 @@
         <!-- navbar -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;" data-ng-controller="HeaderCtrl as headerVM">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">ESP3D for</a><a class="navbar-brand" editable-text="headerVM.printerName" onaftersave="headerVM.updatePrinterName()" data-ng-bind="headerVM.printerName"></a>
+                <a class="navbar-brand" href="index.html">ESP3D for  <span id="firmware_target">Unknown</span></a><a class="navbar-brand" editable-text="headerVM.printerName" onaftersave="headerVM.updatePrinterName()" data-ng-bind="headerVM.printerName"></a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li uib-dropdown>
                      <a class="dropdown-toggle glyphicon glyphicon-info-sign" href="#" uib-dropdown-toggle></a>
                      <ul class="dropdown-menu" uib-dropdown-menu>
                         <li>
-                            <a href="http://www.panucatt.com/" >
-                                <span class="pull-right" translate>Board</span>
-                                <span class="glyphicon glyphicon-signal pull-left"></span>
-                                <span class="clearfix"></span>
-                            </a>
                             <a href="https://github.com/luc-github/ESP3D" >
                                 <span class="pull-right" translate>Firmware</span>
                                 <span class="glyphicon glyphicon-cog pull-left"></span>
@@ -115,7 +110,7 @@
                                         <input type="text" style="width:50px" value="200" data-ng-model="tempVM.heaterT0SelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'T0')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('T0')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td class="col-lg-3"><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT0DisplayTemp"></span><span data-ng-show="tempVM.heaterT0TargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
+                                    <td class="col-lg-3"><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT0DisplayTemp"></span><span data-ng-show="tempVM.heaterT0TargetTemp >  0" class="glyphicon glyphicon-fire pull-right" style="color:red"></span></td>
                                 </tr>
                                 <tr data-ng-show="tempVM.secondExtruder.supportEnabled" data-ng-cloak>
                                     <td translate>Heater T1</td>
@@ -124,7 +119,7 @@
                                         <input type="text" style="width:50px" value="200" data-ng-model="tempVM.heaterT1SelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'T1')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('T1')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT1DisplayTemp"></span><span data-ng-show="tempVM.heaterT1TargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
+                                    <td><span class="tempDisplay text-nowrap" data-ng-bind="tempVM.heaterT1DisplayTemp"></span><span data-ng-show="tempVM.heaterT1TargetTemp >  0" class="glyphicon glyphicon-fire pull-right" style="color:red"></span></td>
                                 </tr>
                                 <tr>
                                     <td translate>Bed</td>
@@ -133,7 +128,7 @@
                                         <input type="text" style="width:50px" value="60" data-ng-model="tempVM.bedSelectedTemp" data-ng-keyup="tempVM.handleKeyUp($event, 'bed')">&deg;C&nbsp;&nbsp;
                                         <button data-ng-click="tempVM.heatSet('bed')" class="btn btn-danger glyphicon glyphicon-ok"></button>
                                     </td>
-                                    <td><span class="tempDisplay text-nowrap" ng-bind="tempVM.bedDisplayTemp"></span><span data-ng-show="tempVM.bedTargetTemp >  0" class="glyphicon glyphicon-fire pull-right"></span></td>
+                                    <td><span class="tempDisplay text-nowrap" ng-bind="tempVM.bedDisplayTemp"></span><span data-ng-show="tempVM.bedTargetTemp >  0" class="glyphicon glyphicon-fire pull-right" style="color:red"></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -201,13 +196,14 @@
                 <div id="filePanel" class="col-lg-6 col-md-6">
                     <div class="panel panel-default" data-ng-controller="FileCtrl as fileVM">
                         <div class="panel-heading">
-                            <span translate>Files</span><span>:&nbsp;</span><span id="root_sd">/sd/</span>
+                            <span translate>Files</span><span>:&nbsp;</span><span id="root_sd" data-ng-show="fileVM.visible_for('Smoothieware')">/sd/</span>
                             <div class="pull-right">
-                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/sd/')" translate>/sd</button>
-                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/ext/')" translate>/ext</button>
+                                <button class="btn btn-xs btn-primary" data-ng-show="!fileVM.visible_for('Smoothieware')"  data-ng-click="fileVM.refreshFiles('')" translate>Refresh</button>
+                                <button class="btn btn-xs btn-primary" data-ng-show="fileVM.visible_for('Smoothieware')" data-ng-click="fileVM.refreshFiles('/sd/')" translate>/sd</button>
+                                <button class="btn btn-xs btn-primary" data-ng-show="fileVM.visible_for('Smoothieware')" data-ng-click="fileVM.refreshFiles('/ext/')" translate>/ext</button>
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.progress()" translate>Progress</button>
                                 <button class="btn btn-xs btn-primary" data-ng-click="fileVM.abort()" translate>Abort</button>
-                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/sd/')" data-ngf-select="fileVM.uploadFile($file)" data-ngf-accept="'.g,.gco,.gcode'" translate>Upload</button>
+                                <button class="btn btn-xs btn-primary" data-ng-click="fileVM.refreshFiles('/ext/')" data-ngf-select="fileVM.uploadFile($file)" data-ngf-accept="'.g,.gco,.gcode'" translate>Upload</button>
                             </div>
                         </div>
                         <div class="panel-body panel-height panel-scroll ">
@@ -253,7 +249,6 @@
                 </div>
             </div>
          </div>
-        <div id="firmware_target">Unknown</div> 
     </div>
    
     <script src="lib/angular/angular.min.js"></script>
